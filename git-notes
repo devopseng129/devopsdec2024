@@ -1,0 +1,92 @@
+git Demo scenerios:
+--------------------
+scenerio1: Create a working directory
+> mkdir gitdemo
+> cd gitdemo
+
+initiliazing version controlling in working directory
+> git init
+
+scenrio 2: create a file and adding file to local repository
+-------------
+> vim file1
+> git status // file is not tracked by git
+> git add .
+> git status // file is ready to be commited
+> git commit -m "commit file1"
+> git ls-files
+
+Scenerio 3: check for git log and history
+
+> git log
+> git log --oneline
+> git show commitid //show all changes which happened with a commit id
+
+scenerio 4: update exisitng file
+> git commit -a -m "modified file1"
+
+scenerio 5: verify unstaged and staged changes
+
+> vim file2
+> git diff file2 // show all changes made in file2 when file is not staged
+> git diff --staged file2  // show all changes made in file2 when file is  staged
+
+scenrio 6: unstaging a staged file
+> git restore --staged file2
+
+
+
+scenerio 7: deletion of files
+-- deletion of file from wd and local repository
+> git rm file1
+> git status
+> git commit -m "deleting file1"
+> git revert commmit id // revert deletion of file1 which is getting tracked by a commit id
+
+
+-- deletion of file from local repo only
+> git rm --cached file // deletes file from local repo only
+
+scenerio 8: enable git to ignore any specific file or a file with some specific syantx.
+> touch filename // create one empty file
+
+
+Branching: 
+--------------
+
+scenerio 9: create a branch
+> git branch b1 master // to create a branch with name "b1"
+> git branch -a // list all branches and check active branch(* beside it)
+> git checkout b1 // to switch to b1 branch
+
+scsnerio 10: merging branches
+> git checkout master // switch to destination/target branch
+> git merge b1 master // move b1 contents to master branch
+
+scenerio 11: merge conflict
+
+> git branch b2 master
+> git checkout b1
+> vi file4
+> git add .
+> git commit -m "modified file4"
+
+> git checkout b2
+> vi file4
+> git add .
+> git commit -m "modified file4"
+
+
+> git checkout b1
+> git merge b2 b1
+> error:
+
+Auto-merging file4
+CONFLICT (content): Merge conflict in file4
+Automatic merge failed; fix conflicts and then commit the result.
+
+> vi file4
+> git add .
+> git commit -m "resolving conflicts"
+
+scsenrio 12: stashing: move all untracked changes to temporary location
