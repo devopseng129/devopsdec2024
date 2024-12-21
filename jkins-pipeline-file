@@ -1,0 +1,56 @@
+pipeline {
+    
+  agent any
+  
+  tools {
+      
+      maven 'maven 3.8'
+      
+  }
+  
+  stages {
+      
+      stage('clone') {
+          steps {
+              git branch: 'main', url: 'https://github.com/devopseng129/webhook-pipeline.git'
+          }
+      }
+      
+      stage('compile') {
+          steps{
+              sh 'mvn compile'
+          }
+      }
+      
+      stage('code_review') {
+          steps {
+              sh 'mvn pmd:pmd'
+          }
+      }
+      
+      stage('package') {
+          steps {
+              sh 'mvn package'
+          }
+      }
+  }
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+       
