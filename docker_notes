@@ -1,0 +1,102 @@
+contarization tools: docker, rkt, rhel: lxi
+
+docker:
+
+	image: 			snapshot of configuration which you want to use while creating  your machine
+		2 types of images:
+			1. OS type 
+			: ubuntu, centos, debian
+			2. application type : tomcat, mariadb, sqldb, nginx, apache, httpd
+	dockerfile:		It is simple text file which is used to create an image.
+	container:      run an image, you create a container
+
+virtual machine
+
+
+
+docker commands:
+
+installtion commands:\
+1. apt update
+2. apt install docker.io
+
+important docker commands:
+1. docker images
+2. docker pull <image name>
+3. docker ps -a
+4. docker run <imagename>
+
+5. 2 ways to start a container:
+> foreground mode : create container from os type images.
+In this case:
+docker run -it --name <contname> os-type-image
+docker attach contid/contname
+	a. container ill be created
+	b. container will be up and running
+	c. you will be logged in into container.
+	d. user will be attached to container terminal.
+	e. user can exit from container by pressing sahortcut keys: ctrl+p+q
+	
+> detached mode : If image is of application type\
+docker run -d --name <contname> app-type-image
+docker exec -it contid/contname bash
+In this case:
+	a. container will be created
+	b. container will be up and running
+	c. you will not be logged in into container.
+	d. user will not be attached to container terminal.
+
+
+6. docker attach contid/contname
+7. docker stop contid/contname
+8. docker start contid/contname
+9. docker rm contid/contname ==> when container is in exited state
+9. docker rm contid/contname -f ==> when container is UP state
+
+10. Port forwarding can be done in 2 ways:
+> -p
+	a. user has to provide your own system/vm port and map it to the container exposed port.
+	> syntax: docker run -d --name <contname> -p system/vm_port:container_exp[osed_port <imagename>
+> -P
+	a. no need to provide your own system/vm port and map it to the container exposed port, it happens autoimatically and docker does it for you.
+	> syntax: docker run -d --name <contname> -P <imagename>
+	
+11. Docker volumes:
+> This concept is used to preserve data of the container's directory on host machine directory.
+> This concept is used in order to copy data from hmachine to container directory.
+
+2 methods fgor docker vole:
+> Named volume
+
+	> docker volume create myvol
+	> docker run -it --name vol-cont1 -v myvol:/tmp ubuntu
+	> docker inspect myvol
+	
+> Bind mount
+	> docker run -d --name vol-cont2 -v anydirpath:/pathpfcontdir 
+
+12. docker volume ls
+13. Important/commonly used docker executables:
+FROM: what will be the base image , this base image will be further customised to create your own docker image.
+RUN: It is used to execute any linux command, or linux script
+ENV: we pass some environment variables
+WORKDIR: used to specify default directory when commands will be executed.
+COPY: copy a file from host machine to container.
+CMD: Specify default commands.
+EXPOSE: open a port in container
+
+https://docs.docker.com/reference/dockerfile/
+
+14. 
+> docker file is a text file.
+> docker file will always have a name as dockerfile or Dockerfile
+> you have to build a dockerfile to create an image
+>  A dockerfile will start with FROM keyword , and this a mandatory keyword.
+> you can not repeat FROM keyword                                                
+
+
+
+
+
+
+
